@@ -184,9 +184,9 @@ function App() {
     <>
       <section id='container'>
 
-        <div className='out'>
-          <button onClick={() => out()}>logout</button>
-        </div>
+        <h1>
+          {"welcome".toUpperCase()} {myAcc}
+        </h1>
 
         <div className='account'>
            <div className='def'>
@@ -204,12 +204,12 @@ function App() {
           
           <div className='def'>
               <h3>token total supply:</h3>
-              <p>{tokenTotalsupply} WAL</p>
+              <p>{tokenTotalsupply} MHT</p>
            </div>
 
            <div className='def'>
               <h3> your token balance:</h3>
-              <p>{yuortokenbal} WAL</p>
+              <p>{yuortokenbal} MHT</p>
            </div>
 
         </div>
@@ -239,6 +239,9 @@ function App() {
 
 
       </section>
+      <div className='out'>
+          <button onClick={() => out()}>logout</button>
+        </div>
     </>
   );
 }

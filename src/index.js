@@ -7,11 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { initContract } from "./utils";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-/*root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);*/
+
 
 
 window.nearInitPromise = initContract()

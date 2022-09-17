@@ -1,7 +1,4 @@
-//import { connect, Contract, keyStores, WalletConnection } from 'near-api-js'
-//import getConfig from './config'
 
-//const nearConfig = getConfig(process.env.NODE_ENV || 'development')
 
 import { CONTRACT_NAME, getConfig } from "./config";
 
@@ -10,32 +7,11 @@ const nearConfig = getConfig('development');
 // Initialize contract & set global variables
 export async function initContract () {
   // Initialize connection to the NEAR testnet
-  //const near = await connect(Object.assign({ deps: { keyStore: new keyStores.BrowserLocalStorageKeyStore() } }, nearConfig))
-    let near = await window.nearApi.connect(nearConfig);
-
-  // Initializing Wallet based Account. It can work with NEAR testnet wallet that
-  // is hosted at https://wallet.testnet.near.org
-  window.walletConnection = new window.nearApi.WalletConnection(near);
-
-  // Getting the Account ID. If still unauthorized, it's just empty string
-  //window.accountId = window.walletConnection.getAccountId()
-
-  window.account = await window.walletConnection.account()
-
-  // Initializing our contract APIs by contract name and configuration
-  /*window.contract = await new Contract(window.walletConnection.account(), nearConfig.contractName, {
-    // View methods are read only. They don't modify the state, but usually return some value.
-    viewMethods: ['get_num'],
-    // Change methods can modify the state. But you don't receive the returned value when called.
-    changeMethods: ['increment', 'decrement', 'reset'],
-  })*/
-
+  window.walletConnection = new window.nearApi.WalletConnection(await window.nearApi.connect(nearConfig));
   window.contract =  new window.nearApi.Contract(
-    window.account, 
+    await window.walletConnection.account(), 
     CONTRACT_NAME, {
-    // View methods are read only. They don't modify the state, but usually return some value.
     viewMethods: ['ft_total_supply', 'ft_balance_of'],
-    // Change methods can modify the state. But you don't receive the returned value when called.
     changeMethods: ['burn', 'tranfer_money', 'mint'],
   })
 }; 
@@ -81,11 +57,11 @@ export async function login() {
   if (!isLogging()) {
     window.walletConnection.requestSignIn(CONTRACT_NAME);
   } else {
-    //let me = await getAccount()
+    
     alert(`already login please as ${getAccount()}`);
   }
 
-  //window.walletConnection.requestSignIn(CONTRACT_NAME);
+ 
   
   
 }
@@ -102,10 +78,10 @@ export async function login() {
 
         return acc;
         
-    } else {
+    }
         
         return false;
-    }
+  
     
   }
 
@@ -161,10 +137,10 @@ export async function login() {
         return mint_funct;
 
         
-    } else {
+    } 
         
         return 0;
-    }
+  
   }
 
 
@@ -178,9 +154,9 @@ export async function login() {
 
         return burn_funct;
         
-    } else {
+    } 
         return 0;
-    }
+    
   }
 
 
@@ -202,11 +178,9 @@ export async function login() {
 
       return transfer_func;
       
-    } else {
-      
+    } 
       return 0;
 
-    }
   }
 
 

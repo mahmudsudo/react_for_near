@@ -1,10 +1,8 @@
 // Once you deploy the contract to its final account, make sure to specify it here
-//const CONTRACT_NAME = process.env.CONTRACT_NAME || 'change_this_account'; /* TODO: Change this to the deployed account */
 
-//const CONTRACT_NAME = process.env.CONTRACT_NAME || 'akinyemisaheed.testnet';
 const keyStore = new window.nearApi.keyStores.BrowserLocalStorageKeyStore()
 
-export const CONTRACT_NAME = 'fungiblestokens.akinyemisaheedwale2.testnet';
+export const CONTRACT_NAME = 'fungibletoken.mahmudnear.testnet';
 
 export function getConfig (env) {
   switch (env) {
